@@ -1,0 +1,25 @@
+@import '../../../../assets/scss/custom';
+
+:host{
+    border-top: 5px solid $white;
+    border-bottom: 5px solid $white;
+    width: 98%;
+}
+
+
+.state-card{
+    height: toREM(100);
+    font-weight: $font-weight-bold;
+
+    span{
+        text-align: center;
+        font-size: toREM(12);
+    }
+
+    &__circle{
+        width: toREM(35);
+        height: toREM(35);
+        border-radius: 100%;
+        flex-shrink: 0;
+    }
+}

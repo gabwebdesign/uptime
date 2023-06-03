@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <div class="form-group mb-4">
+          <input 
+              type="user" 
+              name="user" 
+              id="user" 
+              class="form-control" 
+              placeholder="User"
+              [(ngModel)]="credentials.user"
+              #user="ngModel"
+              required />
+        </div>
+        <p class="error" *ngIf="submitted && user.errors">User required {{user.errors}}</p>
+        <div class="form-group mb-4">
+          <input 
+            type="password" 
+            name="password" 
+            id="password" 
+            class="form-control" 
+            placeholder="Password"
+            [(ngModel)]="credentials.password" 
+            #password="ngModel"
+            required/>
+        </div>
+        <p class="error" *ngIf="submitted && password.errors">Password required</p>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary">SIGN IN</button>
+        </div>
+
+        <div class="form-group group2">
+          <!-- <div class="text-right">
+            <a routerLink="/forgot-password" class="text-sm font-weight-bold">Forgot password?</a></div>
+          <div class="text-right">
+            <a routerLink="/sign-up" class="text-sm font-weight-bold">Sign Up</a>
+          </div> -->
+        </div>
+
+
+      </form>
+
+      <div class="d-flex justify-content-center w-100 pt-5">
+        <img src="assets/images/logo.png" width="40%" />
+      </div>
+
+    </div>
+  </div>
+</div>

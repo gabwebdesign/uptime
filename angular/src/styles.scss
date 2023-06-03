@@ -1,0 +1,31 @@
+@import "./assets/scss/settings";
+
+html {
+  width: 100vw;
+  height: 100vh;
+  color: $primary;
+  border: 5px solid $white;
+  font-size: toVW(18, 375);
+  @media (min-width: 375px) {
+    font-size: 22px;
+  }
+  @include media-breakpoint-up(md) {
+    font-size: toVW(22);
+  }
+   @include media-breakpoint-up(xl) {
+     font-size: 22px;
+   }
+}
+
+.btn{
+  color:$white;
+}
+
+.form-control{
+  background-color: $white;
+}
+
+section{
+  margin-top: toREM(30);
+  margin-bottom: toREM(30);
+}

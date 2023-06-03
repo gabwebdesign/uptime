@@ -1,0 +1,28 @@
+<div class="wrapper">
+    <div class="d-flex card flex-row w-100 mb-4" (click)="showSkills(user)">
+        <div class="card__light mx-5" [ngSwitch]="user.state">
+                <span *ngSwitchCase="'Idle'" class="bg-green"></span>
+                <span *ngSwitchCase="'Busy'" class="bg-orange"></span>
+                <span *ngSwitchCase="'WFP'" class="bg-blue"></span>
+                <span *ngSwitchCase="'OT'" class="bg-purple"></span>
+                <span *ngSwitchCase="'OOTO'" class="bg-gray"></span>
+                <span *ngSwitchCase="'Lunch'" class="bg-yellow"></span>
+                <span *ngSwitchDefault>(No eligió operación)</span>
+        </div>
+        <div class="card__name" [ngSwitch]="user.state">
+            <span *ngSwitchCase="'Idle'" class="text-green">{{ user.name }}</span>
+            <span *ngSwitchCase="'Busy'" class="text-orange">{{ user.name }}</span>
+            <span *ngSwitchCase="'WFP'" class="text-blue">{{ user.name }}</span>
+            <span *ngSwitchCase="'OT'" class="text-purple">{{ user.name }}</span>
+            <span *ngSwitchCase="'OOTO'" class="text-gray">{{ user.name }}</span>
+            <span *ngSwitchCase="'Lunch'" class="text-gray">{{ user.name }}</span>
+            <span *ngSwitchDefault>(No eligió operación)</span>
+        </div>
+    </div>
+    <div class="chart d-flex w-100 justify-content-center" [class.d-none]="!showingSkills">
+        <div class="chart__content">
+    
+        </div>
+    </div>
+</div>
+

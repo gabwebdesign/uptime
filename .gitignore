@@ -1,0 +1,4 @@
+.DS_Store
+backend/.env
+upt-time-react-version/node_modules
+node_modules

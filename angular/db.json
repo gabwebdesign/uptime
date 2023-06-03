@@ -1,0 +1,68 @@
+{
+  "login": [
+    {
+      "token": "858999909HJKJGHLKHJGKJ0",
+      "userId": 1,
+      "user": "admin",
+      "password": "1234"
+    },
+    {
+      "token": "858999909HJKJGHLKHJGKJ0",
+      "userId": 2,
+      "user": "admin2",
+      "password": "1234"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "role": "dev",
+      "name": "Gabriel Aguilar",
+      "state": "Busy"
+    },
+    {
+      "id": 2,
+      "role": "dev",
+      "name": "Pablo Jímenez",
+      "state": "Idle"
+    },
+    {
+      "id": 3,
+      "role": "qa",
+      "name": "Alvaro Monge",
+      "state": "WFP"
+    },
+    {
+      "id": 4,
+      "role": "qa",
+      "name": "Joshebeth Ortega",
+      "state": "WFP"
+    },
+    {
+      "id": 5,
+      "role": "admin",
+      "name": "Ivan Piedra",
+      "state": "OT"
+    },
+    {
+      "id": 6,
+      "role": "qa",
+      "name": "Ivan Piedra",
+      "state": "Lunch"
+    },
+    {
+      "id": 6,
+      "role": "qa",
+      "name": "Mario Siles",
+      "state": "Busy"
+    }
+  ],
+  "states": [
+    "Busy",
+    "Idle",
+    "WFP",
+    "OT",
+    "OOTO",
+    "Lunch"
+  ]
+}

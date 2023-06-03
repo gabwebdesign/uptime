@@ -1,0 +1,32 @@
+@import '../../../../assets/scss/custom';
+
+:host{
+    margin: toREM(30);
+    transition: 1s all;
+}
+
+
+.card{
+
+
+    &__light{
+        span{
+            width: toREM(40);
+            height: toREM(40);
+            position: absolute;
+            border-radius: 100%;
+        }
+    }
+}
+
+.expanded{
+    height: auto;
+}
+
+.chart{
+    &__content{
+        background-color:$gray-500;
+        width: 300px;
+        height: 400px;
+    }
+}

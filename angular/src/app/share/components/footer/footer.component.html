@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-between px-3" *ngIf="isLoggedIn">
+    <div *ngFor="let state of userStates" [ngSwitch]="state">
+        <div class="state-card d-flex flex-column justify-content-center align-items-center" (click)="setState(state)">
+            <span class="mb-3">{{ state }}</span>
+            <div class="state-card__circle bg-green" *ngSwitchCase="'Idle'"></div>
+            <div class="state-card__circle bg-orange" *ngSwitchCase="'Busy'"></div>
+            <div class="state-card__circle bg-blue" *ngSwitchCase="'WFP'"></div>
+            <div class="state-card__circle bg-purple" *ngSwitchCase="'OT'"></div>
+            <div class="state-card__circle bg-gray" *ngSwitchCase="'OOTO'"></div>
+            <div class="state-card__circle bg-yellow" *ngSwitchCase="'Lunch'"></div>
+        </div>  
+    </div>
+</div>
+

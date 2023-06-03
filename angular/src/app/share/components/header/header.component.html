@@ -1,0 +1,4 @@
+<nav class="w-100 d-flex justify-content-center" *ngIf="isLoggedIn">
+    <div class="nav-item"[class.inactive] = "!inDev" ><a routerLink="/dashboard/dev">DEV TEAM</a></div>
+    <div class="nav-item" [class.inactive] = "!inQA" ><a routerLink="/dashboard/qa">QA TEAM</a></div>
+</nav>
