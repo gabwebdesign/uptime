@@ -2,7 +2,13 @@ const mongoose = require('mongoose');
 
 const UsersScheme = new mongoose.Schema(
     {
-        name:{
+        firstname:{
+            type:String
+        },
+        lastname:{
+            type:String
+        },
+        email:{
             type:String
         },
         role:{
@@ -10,7 +16,8 @@ const UsersScheme = new mongoose.Schema(
             default:"dev"
         },
         state:{
-            type:String
+            type:String,
+            default:"online"
         },
         password:{
             type:String

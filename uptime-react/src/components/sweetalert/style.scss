@@ -1,0 +1,26 @@
+.sweet-alert{
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    max-width: 300px;
+    background-color: #8180f2;
+    border-radius: 13px;
+    padding: 10px;
+    bottom: 20px;
+    color: #fff;
+}
+
+.alert-animation{
+    animation-name: fadeout;
+    animation-delay: 2s;
+    animation-duration: 1s;
+  }
+  
+  @keyframes fadeout{
+    0%{
+      opacity: 1;
+    }
+    100%{
+      opacity: 0;
+    }
+  }

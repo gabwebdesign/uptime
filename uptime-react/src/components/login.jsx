@@ -1,57 +1,39 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { register_action_user } from '../redux/store';
-//import { v4 as uuidv4 } from 'uuid';
-import { Link,useNavigate } from "react-router-dom";
+import { SweetAlert } from "./sweetalert";
+import { Link } from "react-router-dom";
 
-const Register = ()=>{
+const Login = ()=>{
 
-    const baseURL="http://localhost:3001/api/auth/register";
-    const [fname, setFName] = useState(false);
-    const [lname, setLName] = useState(false);
     const [email, setEmail] = useState(false);
     const [password,setPassword] = useState(false);
     const [isValid, setValid] = useState(false);
 
-    const [fnameToushed, setFNameToushed] = useState(false);
-    const [lnameToushed, setLNameToushed] = useState(false);
     const [emailToushed, setEmailToushed] = useState(false);
     const [passwordToushed,setPasswordToushed] = useState(false);
 
     const [error,setError] = useState(false);
-    const navigate = useNavigate();
 
+    const userRegistered = useSelector(state => state)
+
+    useEffect(()=>{
+        console.log('desde login ',userRegistered);
+    })
     const dispatch = useDispatch();
 
-    const registerUser = (e)=> {
+    const showUser = (e)=> {
         e.preventDefault();
-        const newObject = {
-            firstname:e.target[0].value,
-            lastname:e.target[1].value,
-            email:e.target[2].value,
-            password:e.target[3].value
-        }
-        axios.post(baseURL,newObject).then((response) => {
-            console.log(response);
-            dispatch(register_action_user('se registro un usuario'));
-            navigate("/login");
-        });
-        
+        dispatch(register_action_user({
+            email:e.target[0].value,
+            password:e.target[1].value
+        }),'AUTH');
     }
 
     const onchange = (e)=>{
         const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         //const passwordFormat = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}";
         switch(e.target.name){
-            case 'firstname':
-                (e.target.value.length > 0) ? setFName(true) : setFName(false);
-                setFNameToushed(true);
-                break;
-            case 'lastname':
-                (e.target.value.length > 0) ? setLName(true) : setLName(false);
-                setLNameToushed(true);
-                break; 
             case 'email':
                 (e.target.value.match(mailFormat)!=null) ? setEmail(true) : setEmail(false);
                 setEmailToushed(true);
@@ -64,7 +46,7 @@ const Register = ()=>{
             break;
         }
 
-        if(fname && lname && email && password){
+        if( email && password){
             setValid(true);
         }else{
             setValid(false);
@@ -75,12 +57,6 @@ const Register = ()=>{
     }
 
     const validateError=()=>{
-        if(fnameToushed && !fname){
-            setError(true);
-        }
-        if(lnameToushed && !lname){
-            setError(true);
-        }
         if(emailToushed && !email){
             setError(true);
         }
@@ -90,25 +66,15 @@ const Register = ()=>{
     }
 
     return <div>
+        {
+            userRegistered==='se registro un usuario' && 
+            <SweetAlert text={'The user was created successufly'}></SweetAlert>
+        }
         <div className="container">
             <div className="row justify-content-center vh-100 align-items-center">
                 <div className="mt-5 d-flex flex-column col-md-5 form">
-                    <h1>Register</h1>
-                    <form onSubmit={registerUser}  className="d-flex flex-column gap-3 mb-3">
-                        <input 
-                            type='text' 
-                            name="firstname" 
-                            placeholder="First Name" 
-                            required
-                            onChange={onchange}
-                        />
-                        <input 
-                            type='text' 
-                            name="lastname" 
-                            placeholder="Last Name" 
-                            required
-                            onChange={onchange}
-                        />
+                    <h1>Login</h1>
+                    <form onSubmit={showUser}  className="d-flex flex-column gap-3 mb-3">
                         <input 
                             type='email' 
                             name="email" 
@@ -126,7 +92,9 @@ const Register = ()=>{
                         <button type="submit" className="btn btn-primary p-3" disabled={!isValid}>Register</button>
                         { error &&  <p className="text-danger">*Please fill all fields.</p>}
                     </form>
-                    <Link to='/login'>Have already Account?</Link>
+                    <div className="d-flex justify-content-end">
+                        <Link to='/'>Not Registred yet?</Link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,4 +102,4 @@ const Register = ()=>{
     </div>;
 }
 
-export default Register;
+export default Login;

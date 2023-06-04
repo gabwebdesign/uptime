@@ -21,14 +21,14 @@ const registerUser = async(req,res)=>{
 const login = async (req, res) => {
     try{
       req = matchedData(req);
-      const user = await usersModel.findOne({name:req.name})
+      const user = await usersModel.findOne({name:req.email})
       if(!user){
         handleHttpError(res, "USER_NOT_EXISTS", 404);
         return
       }
   
       const hashPassword = user.get('password');
-  
+      console.log('password:: ',hashPassword);
       const check = await compare(req.password, hashPassword)
   
       if(!check){
