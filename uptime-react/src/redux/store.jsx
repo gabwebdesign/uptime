@@ -28,9 +28,13 @@ export const register_action_user = (user) => {
     }
 }
 
+
+// reducers
 export const user_reducer = (state= default_user_state, action)=>{
+    console.log(`action type ${action.type}`)
     switch(action.type){
         case userActionTypes.register:{
+            console.log(1);
             // const checkingUsers = users.find((user)=> user.email === action.payload.email)
             // if(!checkingUsers){
             //     users = [action.payload,...users];
@@ -40,13 +44,14 @@ export const user_reducer = (state= default_user_state, action)=>{
             return action.payload;
         }
         case userActionTypes.auth:{
-            const data = axios.post(`${API_URL}auth/login`,action.payload).then((response) => {
+            console.log(`action.payload ** ${action}`);
+            axios.post(`${API_URL}auth/login`,action).then((response) => {
                 console.log('user from backend', response);
                 return response;
             }).catch((e)=>{
                 console.log(e)
             });
-            return data;
+            //return data;
         }
         default:return state;
     }

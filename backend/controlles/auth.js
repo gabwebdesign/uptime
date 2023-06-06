@@ -21,14 +21,13 @@ const registerUser = async(req,res)=>{
 const login = async (req, res) => {
     try{
       req = matchedData(req);
-      const user = await usersModel.findOne({name:req.email})
+      const user = await usersModel.findOne({email:req.email})
       if(!user){
         handleHttpError(res, "USER_NOT_EXISTS", 404);
         return
       }
   
       const hashPassword = user.get('password');
-      console.log('password:: ',hashPassword);
       const check = await compare(req.password, hashPassword)
   
       if(!check){
@@ -41,13 +40,12 @@ const login = async (req, res) => {
     //     token: await tokenSign(user),
     //     user
     //   }
-      if(user) console.log('success logged');
+      if(user) console.log(user,' success logged');
       res.send({user})
-  
-  
+      
     }catch(e){
       console.log(e)
-      handleHttpError(res, "ERROR_LOGIN_USER")
+      handleHttpError(res,"ERROR_LOGIN_USER")
     }
   }
 

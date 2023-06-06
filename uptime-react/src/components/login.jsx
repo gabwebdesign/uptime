@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { register_action_user } from '../redux/store';
 import { SweetAlert } from "./sweetalert";
@@ -17,17 +17,18 @@ const Login = ()=>{
 
     const userRegistered = useSelector(state => state)
 
-    useEffect(()=>{
-        console.log('desde login ',userRegistered);
-    })
     const dispatch = useDispatch();
 
     const showUser = (e)=> {
         e.preventDefault();
-        dispatch(register_action_user({
+        const credentials = {
             email:e.target[0].value,
             password:e.target[1].value
-        }),'AUTH');
+        }
+        dispatch({
+            type:"AUTH",
+            paylaod:credentials
+        });
     }
 
     const onchange = (e)=>{
