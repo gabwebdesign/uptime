@@ -5,6 +5,7 @@ import Register from './components/register';
 import Login from './components/login';
 import { Provider } from 'react-redux';
 import { store } from './redux/store'
+import { Dashboard } from './components/dashboard/dashboard';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Register />} />
                 <Route path="login" element={<Login />} />
+                <Route path="dashboard" element={<Dashboard />} />
               </Routes>
               </Provider>
             </BrowserRouter>

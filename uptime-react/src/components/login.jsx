@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { register_action_user } from '../redux/store';
+import { register_action_user,loggin_action_user } from '../redux/store';
 import { SweetAlert } from "./sweetalert";
 import { Link } from "react-router-dom";
 
@@ -25,10 +25,7 @@ const Login = ()=>{
             email:e.target[0].value,
             password:e.target[1].value
         }
-        dispatch({
-            type:"AUTH",
-            paylaod:credentials
-        });
+        dispatch(loggin_action_user(credentials));
     }
 
     const onchange = (e)=>{

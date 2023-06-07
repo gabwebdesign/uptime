@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import axios from "axios";
+import { API_URL } from '../config';
 
 //let users=[];
-const API_URL="http://localhost:3001/api/";
 export const register = "REGISTER USER";
 export const userActionTypes = {
     register:"REGISTER USER",
     auth:"AUTH",
-    edit:"EDIT USER",
+    get_users:"GET USERS",
     delete:"DELETE USER"
 };
 
@@ -21,20 +21,34 @@ const default_user_state={
 }
 
 // actions
-export const register_action_user = (user) => {
+export const register_action_user = (data) => {
     return {
         type:userActionTypes.register,
-        payload:user
+        payload:data
+    }
+}
+
+export const get_users_action = (data) => {
+    return {
+        type:userActionTypes.auth,
+        payload:data
+    }
+}
+
+
+export const loggin_action_user = (data) => {
+    return {
+        type:userActionTypes.get_users,
+        payload:data
     }
 }
 
 
 // reducers
 export const user_reducer = (state= default_user_state, action)=>{
-    console.log(`action type ${action.type}`)
+    //console.log(`action type ${action.type}`)
     switch(action.type){
         case userActionTypes.register:{
-            console.log(1);
             // const checkingUsers = users.find((user)=> user.email === action.payload.email)
             // if(!checkingUsers){
             //     users = [action.payload,...users];
@@ -44,16 +58,27 @@ export const user_reducer = (state= default_user_state, action)=>{
             return action.payload;
         }
         case userActionTypes.auth:{
-            console.log(`action.payload ** ${action}`);
-            axios.post(`${API_URL}auth/login`,action).then((response) => {
-                console.log('user from backend', response);
-                return response;
+            console.log(`action.payload ** ${action.payload}`);
+            axios.post(`${API_URL}auth/login`,action.payload).then((response) => {
+                console.log('user from backend', response.data.user);
+                localStorage.setItem('uptime',JSON.stringify(response.data.user))
+                //return response.data.user;
             }).catch((e)=>{
-                console.log(e)
+                console.log(e);
             });
-            //return data;
+            break;
         }
-        default:return state;
+        case userActionTypes.get_users:{
+            let users=[];
+            axios.post(`${API_URL}auth/login`,action.payload).then((response)=>{
+                users = response.data
+            }).catch((e)=>{
+                console.log(e);
+            });
+            return users
+        }
+        default:
+            break;
     }
 }
 
@@ -62,7 +87,7 @@ export const store = configureStore(
     { reducer:user_reducer}
 );
 
-console.log('Estado Inicial',store.getState());
-store.subscribe(()=>{
-    console.log('Cambio de estado', store.getState())
-})
+// console.log('Estado Inicial',store.getState());
+// store.subscribe(()=>{
+//     console.log('Cambio de estado', store.getState())
+// })
