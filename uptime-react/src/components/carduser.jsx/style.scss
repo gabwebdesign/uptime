@@ -1,4 +1,26 @@
+$purple:#8180f2;
+
+.card-container{
+    &__state{
+        background-color: aqua;
+        height: 35px;
+    }
+}
+
 .card{
     max-width: 300px;
     min-width: 240px;
+    border-radius: 0;
+    border: none;
+    padding: 25px;
+
+    img{
+        width: 202px;
+        height: 195px;
+    }
+
+    .job-position{
+        color: #bab4b4;
+        font-size: 14px;
+    }
 }
