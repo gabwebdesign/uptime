@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import axios from "axios";
 import { API_URL } from '../config';
 
-//let users=[];
+let totalUsers=[];
 export const register = "REGISTER USER";
 export const userActionTypes = {
     register:"REGISTER USER",
@@ -62,7 +62,7 @@ export const user_reducer = (state= default_user_state, action)=>{
             axios.post(`${API_URL}auth/login`,action.payload).then((response) => {
                 console.log('user from backend', response.data.user);
                 localStorage.setItem('uptime',JSON.stringify(response.data.user))
-                //return response.data.user;
+                return 'isLogged';
             }).catch((e)=>{
                 console.log(e);
             });
@@ -79,6 +79,21 @@ export const user_reducer = (state= default_user_state, action)=>{
         }
         default:
             break;
+    }
+}
+
+export const auth_reducer = (state='',action)=>{
+    if(action.type===userActionTypes.auth){
+        console.log(`action.payload ** ${action.payload}`);
+        let isResolved;
+        axios.post(`${API_URL}auth/login`,action.payload).then((response) => {
+            console.log('user from backend', response.data.user);
+            localStorage.setItem('uptime',JSON.stringify(response.data.user))
+            isResolved='isLogged';
+        }).catch((e)=>{
+            console.log(e);
+        });
+        return isResolved;
     }
 }
 

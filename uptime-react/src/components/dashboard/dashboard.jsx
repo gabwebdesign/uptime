@@ -3,6 +3,7 @@ import './style.scss';
 import axios from "axios";
 import { API_URL } from '../../config';
 import { CardUser } from '../carduser.jsx/card.user';
+import { NavBar } from '../navbar/navbar';
 
 export const Dashboard =()=>{
 
@@ -22,6 +23,7 @@ export const Dashboard =()=>{
 
     return(
         <div className='container-fluid'>
+            <NavBar />
             <div className='row'>
                 <div className='d-flex flex-column w-100 p-3'>
                     <div className='hero'>
