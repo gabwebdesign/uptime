@@ -1,43 +1,45 @@
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
-import { BrowserRouter,Routes,Route } from "react-router-dom";
+import { Routes,Route } from "react-router-dom";
 import Register from './components/register';
 import Login from './components/login';
-import { Provider } from 'react-redux';
-import { store } from './redux/store'
+import { auth } from './redux/userSlice';
+
 import { Dashboard } from './components/dashboard/dashboard';
 import { ProtectedRoute } from './guards/auth.guard';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { NavBar } from './components/navbar/navbar';
+import { UserInfo } from './components/userinfo/user.info';
 
 function App() {
 
-  const [auth,setAuth] = useState(()=>{
+  const [userSaved,setuserSaved] = useState(()=>{
     // getting stored value
     const saved = localStorage.getItem("uptime");
-    const initialValue = JSON.parse(saved);
-    return initialValue || "";
+    return saved;
   });
+  const dispatch = useDispatch();
 
   useEffect(()=>{
-    if(auth) console.log('hi')
-  })
+    if(userSaved){
+      dispatch(auth(JSON.parse(userSaved)));
+    }
+  },[])
 
   return (
           <div className="App">
-            <BrowserRouter>
-              <Provider store={store}>
+              { userSaved && <NavBar />}
               <Routes>
                 <Route path="/" element={<Register />} />
                 <Route path="login" element={<Login />} />
                 <Route path="dashboard" element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
+                  <ProtectedRoute auth={auth} children={<Dashboard />} />
                 }/>
-                {/* <PrivateRoute path="dashboard" children={<Dashboard />} /> */}
+                <Route path="userinfo" element={
+                  <ProtectedRoute auth={auth} children={<UserInfo />} />
+                }/>
               </Routes>
-              </Provider>
-            </BrowserRouter>
           </div>
   );
 }

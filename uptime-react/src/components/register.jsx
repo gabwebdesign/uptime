@@ -34,7 +34,7 @@ const Register = ()=>{
         }
         axios.post(baseURL,newObject).then((response) => {
             console.log(response);
-            dispatch(register_action_user('se registro un usuario'));
+            //dispatch(register_action_user('se registro un usuario'));
             navigate("/login");
         });
         

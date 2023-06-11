@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 
 export const ProtectedRoute = ({ auth, children }) => {
-    if (!auth) {
+    //console.log('authentication logged ',auth);
+    if (auth==null) {
       return <Navigate to="/login" replace />;
     }
     return children;

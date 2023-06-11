@@ -1,29 +1,27 @@
 import { useEffect, useState } from 'react';
 import './style.scss';
-import axios from "axios";
-import { API_URL } from '../../config';
 import { CardUser } from '../carduser.jsx/card.user';
-import { NavBar } from '../navbar/navbar';
+import axios from "axios";
 
 export const Dashboard =()=>{
 
-    const [totalUsers,setTotalUsers]= useState([]);
+    const [listUsers,setlistUsers]= useState([]);
+
     useEffect(()=>{
-        getUsers();
+        fetchAllUsers();
     },[])
 
-    const getUsers = ()=>{
-        axios.get(`${API_URL}users`).then((response) => {
-            //console.log('user from backend', Object.entries(response.data.data));
-            setTotalUsers(Object.entries(response.data.data));
+    const fetchAllUsers = ()=>{
+        axios.post(`http://localhost:3001/api/users`).then((response) => {
+            console.log('user from backend', response.data.data);
+            setlistUsers(response.data.data);
         }).catch((e)=>{
             console.log(e);
         });
     }
 
     return(
-        <div className='container-fluid'>
-            <NavBar />
+        <div className='w-100'>
             <div className='row'>
                 <div className='d-flex flex-column w-100 p-3'>
                     <div className='hero'>
@@ -31,14 +29,13 @@ export const Dashboard =()=>{
                         <p className='text-center mb-1'>____</p>
                     </div>
                     <div className='dash d-flex flex-wrap justify-content-around w-100 p-3'>
-                        { totalUsers.map(((element)=>{
-                            return <CardUser 
-                            key={element[0]}
-                            firtsName={element[1].name}
-                            lastName={element[1].lastName}
-                            state={element[1].state}
-                            />
-                        }))
+                        { listUsers.map(((element)=>{
+                                return <CardUser 
+                                key={element._id}
+                                firstName={element.name}
+                                state={element.state}
+                                />
+                            }))
                         }
                     </div>
                 </div>

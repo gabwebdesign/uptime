@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { register_action_user,loggin_action_user } from '../redux/store';
+import { auth, setUser } from '../redux/userSlice';
 import { SweetAlert } from "./sweetalert";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Login = ()=>{
 
@@ -25,7 +26,13 @@ const Login = ()=>{
             email:e.target[0].value,
             password:e.target[1].value
         }
-        dispatch(loggin_action_user(credentials));
+        axios.post(`http://localhost:3001/api/auth/login`,credentials).then((response) => {
+            console.log('user from backend', response.data.user);
+            localStorage.setItem('uptime',JSON.stringify(response.data.user));
+            dispatch(auth(response.data.user));
+        }).catch((e)=>{
+            console.log(e);
+        });        
     }
 
     const onchange = (e)=>{

@@ -1,0 +1,30 @@
+
+.user-info{
+    margin: 50px 0;
+    max-width: 700px;
+    background-color: #fff;
+
+    p{
+        font-size: 12px;
+    }
+
+    &__global{
+
+        margin: 30px 10px 0 10px;
+        gap:30px;
+
+        .name{
+            font-size: 16px;
+        }
+
+
+        img{
+            width: 100px;
+            height: 100px;
+        }
+    }
+
+    &__states{
+        gap: 15px;
+    }
+}
