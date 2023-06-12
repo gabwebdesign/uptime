@@ -38,8 +38,22 @@ const createItem = async (req,res)=>{
       }
 }
 
-const updateItem = (req,res)=>{
-
+const updateItem = async (req,res)=>{
+    try{
+        const usertoModified = await usersModel.findOneAndUpdate(
+            {_id:req.body._id},
+            {state:req.body.state},
+            {   new: true,
+                upsert: true,
+                rawResult: true
+            }
+            );
+        console.log(usertoModified);
+        res.status(201);
+        res.send({ usertoModified });
+    }catch (e) {
+        console.log(e, "ERROR_UPDATE_ITEM");
+      }
 }
 
 

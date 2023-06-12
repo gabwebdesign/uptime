@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;1,400&display=swap');
-
-$gray-dark:#e6e6e5;
-$purple:#8180f2;
+@import './assets/scss/colors.scss';
 
 body{
   font-family: 'Roboto', sans-serif;
@@ -14,6 +12,8 @@ input{
 }
 
 .btn{
+  border: none !important;
+  border-radius: 0 !important;
   &.btn-primary{
     background-color: $purple;
   }

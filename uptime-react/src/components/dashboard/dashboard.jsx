@@ -12,7 +12,7 @@ export const Dashboard =()=>{
     },[])
 
     const fetchAllUsers = ()=>{
-        axios.post(`http://localhost:3001/api/users`).then((response) => {
+        axios.get(`http://localhost:3001/api/users`).then((response) => {
             console.log('user from backend', response.data.data);
             setlistUsers(response.data.data);
         }).catch((e)=>{
